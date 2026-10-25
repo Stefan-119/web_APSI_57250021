@@ -1,0 +1,6 @@
+{
+  "name": "FanEDU — Ensiklopedia APSI",
+  "description": "Platform ensiklopedia kurasi akademik materi Analisis dan Perancangan Sistem Informasi (APSI), memadukan pencarian instan, repositori terverifikasi, dan pembaca ensiklopedis standar Wikipedia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

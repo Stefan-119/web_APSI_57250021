@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>FanEDU — Ensiklopedia Analisis &amp; Perancangan Sistem Informasi</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary": "#ffffff", "surface-container-low": "#f2f3ff", "surface-container-high": "#e2e7ff", "error": "#ba1a1a", "on-tertiary-container": "#5fcdbf", "tertiary-container": "#00554e", "on-tertiary": "#ffffff", "inverse-on-surface": "#eef0ff", "on-primary-fixed": "#001453", "inverse-primary": "#b8c4ff", "surface-variant": "#dae2fd", "surface": "#faf8ff", "secondary-fixed-dim": "#b4c5ff", "error-container": "#ffdad6", "on-surface": "#131b2e", "on-error": "#ffffff", "outline-variant": "#c4c5d5", "secondary": "#0051d5", "tertiary-fixed": "#89f5e7", "secondary-container": "#316bf3", "secondary-fixed": "#dbe1ff", "surface-tint": "#3755c3", "on-secondary-fixed": "#00174b", "surface-bright": "#faf8ff", "primary-fixed-dim": "#b8c4ff", "outline": "#757684", "inverse-surface": "#283044", "surface-container-lowest": "#ffffff", "primary": "#00288e", "on-primary-fixed-variant": "#173bab", "surface-dim": "#d2d9f4", "on-primary-container": "#a8b8ff", "on-secondary-container": "#fefcff", "on-background": "#131b2e", "primary-fixed": "#dde1ff", "surface-container": "#eaedff", "on-surface-variant": "#444653", "on-secondary-fixed-variant": "#003ea8", "tertiary-fixed-dim": "#6bd8cb", "on-tertiary-fixed": "#00201d", "tertiary": "#003c36", "background": "#faf8ff", "surface-container-highest": "#dae2fd", "on-error-container": "#93000a", "on-secondary": "#ffffff", "on-tertiary-fixed-variant": "#005049", "primary-container": "#1e40af" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-lg": "1.5rem", "margin-lg": "3rem", "gutter-lg": "2rem", "space-xs": "0.25rem", "space-md": "1rem", "space-xl": "2.5rem", "margin": "1rem", "gutter-sm": "1rem", "space-sm": "0.5rem", "margin-md": "2rem", "gutter": "1.5rem" }, "fontFamily": { "body-md": ["Inter"], "code": ["JetBrains Mono"], "body-lg": ["Inter"], "label-lg": ["Inter"], "headline-sm": ["Newsreader"], "headline-xl": ["Newsreader"], "label-sm": ["Inter"], "headline-lg": ["Newsreader"], "body-sm": ["Inter"], "label-md": ["Inter"], "headline-xl-mobile": ["Newsreader"], "display-lg": ["Newsreader"], "display-lg-mobile": ["Newsreader"], "body-xl": ["Newsreader"], "headline-md": ["Newsreader"] }, "fontSize": { "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }], "code": ["13px", { "lineHeight": "20px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "500" }], "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }], "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "600" }], "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }], "headline-xl-mobile": ["26px", { "lineHeight": "34px", "fontWeight": "600" }], "display-lg": ["48px", { "lineHeight": "56px", "fontWeight": "600" }], "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }], "body-xl": ["20px", { "lineHeight": "32px", "fontWeight": "400" }], "headline-md": ["22px", { "lineHeight": "30px", "fontWeight": "600" }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-md border-b border-outline-variant/40"><div class="h-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4"><div class="flex items-center gap-3 shrink-0"><a class="flex items-center gap-2.5" data-path="beranda" href="#"><img alt="FanEDU Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VVmGiDmxSW_LaPuzQQBjulBjF5u1Xwx_qtsO68yvIticqpuO2VhLrBghs0A_FXonuSBcTYquIlJ_LSlbSRKN_jmYRXTVyspVKA-NDZpakTwjgcsYxfgUh4z_8-5kU2bXps2ND3mTd6IlIfKZtRm86D_HrE58hRJR2bPafcGuHezMbXSWzqLwJy0u7jPFslggb57gRDZwU1HzYEb89aGCzbSI22gtJ1_5QwqZ3ZyxDgrDE72epI69OpPmw"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-primary leading-none">FanEDU</span><span class="font-label-sm text-[9px] uppercase tracking-wider text-on-surface-variant font-medium mt-0.5">Knowledge Base APSI</span></div></a><div class="hidden xl:flex items-center pl-3 border-l border-outline-variant/60"><div class="flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container-low border border-outline-variant/60 text-on-surface-variant" title="Institut Bisnis dan Informatika Kwik Kian Gie"><span class="material-symbols-outlined text-[15px] text-primary">school</span><span class="font-label-sm text-label-sm tracking-wide text-on-surface font-semibold">IBIKKG</span><span class="text-[10px] text-outline text-slate-400">•</span><span class="font-label-sm text-[10px] text-on-surface-variant hidden 2xl:inline">Kwik Kian Gie School of Business</span></div></div></div><nav class="hidden lg:flex items-center gap-6 h-full" data-active-classes="text-primary font-semibold border-b-2 border-primary"><a aria-current="page" class="h-full inline-flex items-center transition-colors text-primary font-semibold border-b-2 border-primary" data-path="beranda" href="#">Beranda</a><a class="h-full inline-flex items-center font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors border-b-2 border-transparent" data-path="jelajahi-topik" href="#">Jelajahi Topik</a><a class="h-full inline-flex items-center font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors border-b-2 border-transparent" data-path="artikel-referensi" href="#">Artikel Referensi</a><a class="h-full inline-flex items-center font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors border-b-2 border-transparent" data-path="tentang-fanedu" href="#">Tentang FanEDU</a></nav><div class="flex items-center gap-3 ml-auto lg:ml-0 shrink-0"><div class="relative hidden sm:block w-48 md:w-64"><div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none"><span class="material-symbols-outlined text-outline text-[18px]">search</span></div><input class="w-full pl-8 pr-14 py-1.5 bg-surface-container-low border border-outline-variant/60 rounded-full font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-all" placeholder="Cari materi, diagram..." type="text"/><div class="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none"><kbd class="px-1.5 py-0.5 font-code text-[10px] bg-surface-container-lowest border border-outline-variant rounded text-on-surface-variant">Ctrl K</kbd></div></div><div class="flex items-center gap-2"><a class="px-3 py-1.5 rounded font-label-lg text-label-lg text-on-surface hover:text-primary hover:bg-surface-container-low transition-colors" data-path="masuk" href="#">Masuk</a><a class="px-3.5 py-1.5 rounded font-label-lg text-label-lg bg-primary-container text-on-primary hover:bg-primary transition-colors shadow-sm" data-path="daftar" href="#">Daftar</a></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-[calc(100vh-64px)]"><div class="flex flex-col w-full">
+<!-- Top Academic Notification / Scholarly Citation Ticker -->
+<div class="w-full bg-surface-container-low py-2 px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-on-surface-variant font-label-md text-label-md">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider font-semibold">Kurikulum 2026</span>
+<span class="text-on-surface font-medium">Kompilasi Standar Akademik APSI (IEEE SWEBOK v3 &amp; OMG UML 2.5)</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="inline-flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+          Basis Riset Terbuka Mahasiswa IBIKKG
+        </span>
+<span class="hidden md:inline font-code text-code text-outline text-xs">DOI: 10.31294/fanedu.apsi.2026</span>
+</div>
+</div>
+</div>
+<!-- Hero Section: Google-Inspired Central Search Console -->
+<section class="relative w-full py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-surface-container-lowest overflow-hidden">
+<!-- Subtle Scholarly Watermark Grid -->
+<div class="absolute inset-0 pointer-events-none opacity-40">
+<svg class="w-full h-full" fill="none" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="48" id="grid-pattern" patternunits="userSpaceOnUse" width="48">
+<path class="text-surface-container-high" d="M 48 0 L 0 0 0 48" fill="none" stroke="currentColor" stroke-width="0.8"></path>
+</pattern>
+</defs>
+<rect fill="url(#grid-pattern)" height="100%" width="100%"></rect>
+</svg>
+</div>
+<div class="relative max-w-4xl mx-auto flex flex-col items-center text-center">
+<!-- Institutional Tagline Pill -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container text-on-surface mb-6 shadow-sm">
+<span class="material-symbols-outlined text-secondary text-base">menu_book</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Repositori Ensiklopedia Terbuka</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Analisis &amp; Perancangan Sistem Informasi</span>
+</div>
+<!-- Main Headline: Newsreader Serif Display -->
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight max-w-3xl mb-4 leading-tight">
+        Eksplorasi Ensiklopedia Materi APSI
+      </h1>
+<p class="font-headline-sm text-headline-sm text-on-surface-variant max-w-2xl font-normal mb-10 leading-relaxed">
+        Cari konsep sistem, siklus SDLC, metodologi pengembangan, pemodelan UML, hingga perancangan arsitektur perangkat lunak dengan referensi terverifikasi.
+      </p>
+<!-- Search Console Bar Container (Google-inspired clean pill) -->
+<div class="w-full max-w-2xl relative" id="search-console-wrapper">
+<div class="relative flex items-center w-full bg-surface-container-lowest rounded-full shadow-lg transition-all duration-200">
+<div class="pl-5 pr-2 text-outline flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-2xl">search</span>
+</div>
+<input aria-label="Cari artikel dan materi analisis perancangan sistem informasi" autocomplete="off" class="w-full py-4 pr-24 pl-1 bg-transparent font-body-lg text-body-lg text-on-surface placeholder:text-outline focus:outline-none" id="apsi-search-input" placeholder="Cari materi APSI... (misal: Use Case Diagram, SDLC Waterfall, Normalisasi)" type="text"/>
+<!-- Trailing Buttons & Key Hint -->
+<div class="absolute right-3.5 flex items-center gap-1.5">
+<button class="hidden p-1 rounded-full text-outline hover:text-on-surface hover:bg-surface-container transition-colors" id="search-clear-btn" title="Bersihkan input" type="button">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+<button class="p-2 rounded-full bg-primary-container text-on-primary hover:bg-primary transition-colors flex items-center justify-center shadow-sm" title="Eksekusi Pencarian" type="button">
+<span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Live Predictive Autocomplete Dropdown Preview -->
+<div class="hidden absolute top-full left-0 right-0 mt-2 bg-surface-container-lowest rounded-xl shadow-xl overflow-hidden z-30 text-left" id="search-suggestions">
+<div class="p-2 bg-surface-container-low flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>Rekomendasi Dokumen Terkait</span>
+<span class="font-code text-code">Tekan ESC untuk menutup</span>
+</div>
+<ul class="py-1 divide-y divide-surface-container">
+<li>
+<a class="flex items-center justify-between px-4 py-3 hover:bg-surface-container-low transition-colors group" data-path="sdlc-overview" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl group-hover:scale-110 transition-transform">schema</span>
+<div>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold block">SDLC — Software Development Life Cycle</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">6 Fase Inti: Perencanaan, Analisis, Desain, Implementasi, Testing, Evaluasi</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-code text-code text-xs">Modul 01</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-4 py-3 hover:bg-surface-container-low transition-colors group" data-path="uml-diagrams" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-xl group-hover:scale-110 transition-transform">account_tree</span>
+<div>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold block">UML — Unified Modeling Language (v2.5)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Diagram Struktural &amp; Perilaku: Use Case, Class, Activity, Sequence</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-code text-code text-xs">Modul 05</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-4 py-3 hover:bg-surface-container-low transition-colors group" data-path="srs-specification" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary-container text-xl group-hover:scale-110 transition-transform">description</span>
+<div>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold block">Analisis Kebutuhan Sistem &amp; Standar SRS</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">IEEE 830: Kebutuhan Fungsional, Non-Fungsional, Matriks Ketertelusuran</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-code text-code text-xs">Modul 03</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-4 py-3 hover:bg-surface-container-low transition-colors group" data-path="agile-vs-waterfall" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl group-hover:scale-110 transition-transform">compare_arrows</span>
+<div>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold block">Metode Agile Scrum vs Tradisional Waterfall</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Matriks Komparasi Karakteristik Proyek, Kecepatan Rilis, &amp; Manajemen Risiko</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-code text-code text-xs">Modul 02</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<!-- Quick Filter Chips Below Search -->
+<div class="flex flex-wrap items-center justify-center gap-2 mt-5">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider mr-1">Topik Cepat:</span>
+<button class="quick-chip px-3 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" data-query="SDLC" type="button">
+          SDLC
+        </button>
+<button class="quick-chip px-3 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" data-query="Waterfall" type="button">
+          Waterfall
+        </button>
+<button class="quick-chip px-3 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" data-query="Agile &amp; Scrum" type="button">
+          Agile &amp; Scrum
+        </button>
+<button class="quick-chip px-3 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" data-query="UML Diagram" type="button">
+          UML Diagram
+        </button>
+<button class="quick-chip px-3 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" data-query="DFD Level 0-1" type="button">
+          DFD
+        </button>
+<button class="quick-chip px-3 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" data-query="Analisis Kebutuhan" type="button">
+          Analisis Kebutuhan
+        </button>
+<button class="quick-chip px-3 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" data-query="Perancangan Basis Data" type="button">
+          Perancangan Basis Data
+        </button>
+</div>
+</div>
+</section>
+<!-- Quick Stats & Academic Overview Bar (Wikipedia Infobox inspired strip) -->
+<section class="w-full bg-surface-container py-8 px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+<div class="bg-surface-container-lowest p-5 rounded-lg flex items-center gap-4 shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-2xl">auto_stories</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-on-surface leading-none font-bold">6 Modul</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Kurikulum Inti APSI Standar Nasional</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg flex items-center gap-4 shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-2xl">menu_book</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-on-surface leading-none font-bold">48+ Artikel</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Monograf &amp; Panduan Terverifikasi</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg flex items-center gap-4 shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-tertiary-container text-2xl">verified_user</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-on-surface leading-none font-bold">OMG &amp; IEEE</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Sinkron Standar UML &amp; SWEBOK</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg flex items-center gap-4 shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-2xl">school</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-on-surface leading-none font-bold">100% Terbuka</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Bebas Iklan untuk Mahasiswa &amp; Dosen</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Curated Learning Path for Students (Jalur Belajar Semester APSI) -->
+<section class="w-full py-16 px-4 sm:px-6 lg:px-8 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+<div>
+<div class="inline-flex items-center gap-1.5 text-primary font-label-sm text-label-sm uppercase tracking-wider font-semibold mb-2">
+<span class="material-symbols-outlined text-sm">route</span>
+            Rekomendasi Alur Studi
+          </div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">
+            Jalur Belajar Kurikulum APSI
+          </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1">
+            Panduan sekuensial mempelajari perancangan sistem informasi dari konsep fondasi hingga kesiapan implementasi.
+          </p>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-lg text-secondary">info</span>
+          Berdasarkan RPS Semester V Program Studi SI
+        </div>
+</div>
+<!-- Roadmap Sequence Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Step 1 -->
+<div class="relative bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-code text-code text-xs px-2.5 py-1 rounded bg-surface-container-low text-primary font-semibold">FASE 01</span>
+<span class="material-symbols-outlined text-outline">history_edu</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-semibold">Fondasi &amp; Konsep Sistem</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Memahami elemen sistem informasi, klasifikasi pemangku kepentingan (stakeholder), nilai bisnis TI, dan pengantar siklus hidup software.
+            </p>
+</div>
+<div class="mt-6 pt-4 bg-surface-container-low -mx-6 -mb-6 px-6 py-3 rounded-b-xl flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>6 Sub-Topik</span>
+<a class="text-primary font-semibold flex items-center gap-1 hover:underline" data-path="fondasi-apsi" href="#">
+              Mulai <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-code text-code text-xs px-2.5 py-1 rounded bg-surface-container-low text-primary font-semibold">FASE 02</span>
+<span class="material-symbols-outlined text-outline">manage_search</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-semibold">Analisis &amp; Elisitasi Kebutuhan</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Wawancara stakeholder, kuesioner, studi kelayakan TELOS, identifikasi batasan fungsional, dan penyusunan dokumen formal SRS (IEEE 830).
+            </p>
+</div>
+<div class="mt-6 pt-4 bg-surface-container-low -mx-6 -mb-6 px-6 py-3 rounded-b-xl flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>8 Sub-Topik</span>
+<a class="text-primary font-semibold flex items-center gap-1 hover:underline" data-path="analisis-kebutuhan" href="#">
+              Mulai <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-code text-code text-xs px-2.5 py-1 rounded bg-surface-container-low text-primary font-semibold">FASE 03</span>
+<span class="material-symbols-outlined text-outline">account_tree</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-semibold">Pemodelan Visual UML</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Konstruksi diagram Use Case, Activity Diagram swimlane, Sequence Diagram pesan berurutan, hingga Class Diagram relasi objek agregasi.
+            </p>
+</div>
+<div class="mt-6 pt-4 bg-surface-container-low -mx-6 -mb-6 px-6 py-3 rounded-b-xl flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>12 Sub-Topik</span>
+<a class="text-primary font-semibold flex items-center gap-1 hover:underline" data-path="pemodelan-uml" href="#">
+              Mulai <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="relative bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-code text-code text-xs px-2.5 py-1 rounded bg-surface-container-low text-primary font-semibold">FASE 04</span>
+<span class="material-symbols-outlined text-outline">layers</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-semibold">Desain Arsitektur &amp; Basis Data</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Normalisasi 1NF-3NF/BCNF, pemodelan Entity-Relationship Diagram (ERD), skema deployment, perancangan REST API, dan tata letak UI/UX.
+            </p>
+</div>
+<div class="mt-6 pt-4 bg-surface-container-low -mx-6 -mb-6 px-6 py-3 rounded-b-xl flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>10 Sub-Topik</span>
+<a class="text-primary font-semibold flex items-center gap-1 hover:underline" data-path="desain-arsitektur" href="#">
+              Mulai <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Kategori Pembelajaran Utama (Grid 3x2 Encyclopedic Cards) -->
+<section class="w-full py-16 px-4 sm:px-6 lg:px-8 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+<div>
+<div class="inline-flex items-center gap-1.5 text-secondary font-label-sm text-label-sm uppercase tracking-wider font-semibold mb-2">
+<span class="material-symbols-outlined text-sm">category</span>
+            Taksonomi Ensiklopedia
+          </div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">
+            Kategori Pembelajaran Utama
+          </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1">
+            Akses cepat materi referensi yang disusun secara terstruktur menurut domain keahlian rekayasa sistem.
+          </p>
+</div>
+<a class="inline-flex items-center gap-1.5 font-label-lg text-label-lg text-primary hover:text-primary-container font-semibold transition-colors" data-path="jelajahi-topik" href="#">
+          Lihat Indeks Lengkap A-Z
+          <span class="material-symbols-outlined text-base">north_east</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1: SDLC -->
+<article class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="p-3 rounded-lg bg-surface-container text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">sync</span>
+</span>
+<span class="font-code text-code text-xs text-outline">CAT. 01 / SDLC</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-semibold group-hover:text-primary transition-colors">
+<a data-path="kategori-sdlc" href="#">Siklus Hidup Pengembangan Sistem (SDLC)</a>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+              Memahami fase menyeluruh pembangunan aplikasi: Feasibility Study, Requirement Analysis, Architecture Design, Coding, Testing, dan Maintenance berkala.
+            </p>
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Kelayakan TELOS</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Project Charter</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Cost-Benefit Analysis</span>
+</div>
+</div>
+<div class="pt-4 bg-surface-container-lowest flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>8 Artikel Referensi</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</article>
+<!-- Card 2: Metodologi -->
+<article class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="p-3 rounded-lg bg-surface-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">view_kanban</span>
+</span>
+<span class="font-code text-code text-xs text-outline">CAT. 02 / METODE</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-semibold group-hover:text-primary transition-colors">
+<a data-path="kategori-metodologi" href="#">Metodologi Pengembangan Sistem</a>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+              Eksplorasi paradigma pengembangan: Model Waterfall sekuensial, Spiral berorientasi risiko, Rapid Application Development (RAD), hingga Agile Scrum modern.
+            </p>
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Waterfall Tradisional</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Scrum Sprint</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Kanban Board</span>
+</div>
+</div>
+<div class="pt-4 bg-surface-container-lowest flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>7 Artikel Referensi</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</article>
+<!-- Card 3: Analisis Kebutuhan -->
+<article class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="p-3 rounded-lg bg-surface-container text-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">assignment</span>
+</span>
+<span class="font-code text-code text-xs text-outline">CAT. 03 / KEBUTUHAN</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-semibold group-hover:text-primary transition-colors">
+<a data-path="kategori-analisis" href="#">Analisis &amp; Spesifikasi Kebutuhan</a>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+              Teknik ekstraksi aspirasi klien via observasi dan JAD. Formalisasi Software Requirements Specification (SRS), User Stories, dan acceptance criteria.
+            </p>
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Standar IEEE 830</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Fungsional vs Non-Fung</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Matriks RTM</span>
+</div>
+</div>
+<div class="pt-4 bg-surface-container-lowest flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>9 Artikel Referensi</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</article>
+<!-- Card 4: Perancangan Arsitektur -->
+<article class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="p-3 rounded-lg bg-surface-container text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">domain</span>
+</span>
+<span class="font-code text-code text-xs text-outline">CAT. 04 / ARSITEKTUR</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-semibold group-hover:text-primary transition-colors">
+<a data-path="kategori-arsitektur" href="#">Perancangan Sistem &amp; Arsitektur</a>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+              Pola arsitektur n-tier, Microservices vs Monolith, pemodelan data konseptual, relasional, normalisasi tabel, dan prinsip antarmuka UI/UX heuristik.
+            </p>
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">3-Tier Architecture</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">ERD &amp; Skema Relasi</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Heuristik Nielsen</span>
+</div>
+</div>
+<div class="pt-4 bg-surface-container-lowest flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>8 Artikel Referensi</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</article>
+<!-- Card 5: Pemodelan Berorientasi Objek -->
+<article class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="p-3 rounded-lg bg-surface-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">hub</span>
+</span>
+<span class="font-code text-code text-xs text-outline">CAT. 05 / UML 2.5</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-semibold group-hover:text-primary transition-colors">
+<a data-path="kategori-uml" href="#">Pemodelan Berorientasi Objek (UML)</a>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+              Standar Object Management Group: Notasi Use Case (include/extend), Activity (fork/join), Class Diagram, Sequence Diagram, dan State Machine.
+            </p>
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Use Case Skenario</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Sequence Diagram</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Class &amp; Cardinality</span>
+</div>
+</div>
+<div class="pt-4 bg-surface-container-lowest flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>11 Artikel Referensi</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</article>
+<!-- Card 6: Pengujian & Implementasi -->
+<article class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="p-3 rounded-lg bg-surface-container text-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">flaky</span>
+</span>
+<span class="font-code text-code text-xs text-outline">CAT. 06 / QA &amp; OPS</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2 font-semibold group-hover:text-primary transition-colors">
+<a data-path="kategori-pengujian" href="#">Pengujian, Implementasi &amp; Pemeliharaan</a>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+              Metrik verifikasi: Black Box testing, White Box cyclomatic complexity, User Acceptance Testing (UAT), strategi deployment paralel/direct, dan audit sistem.
+            </p>
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Black-box Testing</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Dokumentasi UAT</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">Strategi Migrasi Data</span>
+</div>
+</div>
+<div class="pt-4 bg-surface-container-lowest flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>5 Artikel Referensi</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- Artikel Pilihan & Baru Diperbarui (Wikipedia Scholarly Clean List Format) -->
+<section class="w-full py-16 px-4 sm:px-6 lg:px-8 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+<!-- Main Column: Scholarly Article List (8 cols) -->
+<div class="lg:col-span-8 space-y-6">
+<div class="flex items-center justify-between pb-4 bg-surface">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-semibold">Tinjauan Akademik Terbaru</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-0.5 font-bold">
+                Artikel Pilihan &amp; Monograf Terverifikasi
+              </h2>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant hidden sm:inline">Diperbarui Maret 2026</span>
+</div>
+<!-- Scholarly Item 1 -->
+<div class="p-6 bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-shadow">
+<div class="flex flex-wrap items-center gap-2 mb-2 font-label-sm text-label-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-semibold">SDLC &amp; Komparasi</span>
+<span class="text-outline">•</span>
+<span class="text-on-surface-variant">Diperbarui: 14 Maret 2026</span>
+<span class="text-outline">•</span>
+<span class="text-on-surface-variant">Estimasi Baca: 12 menit</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 leading-snug">
+<a class="hover:text-primary transition-colors" data-path="artikel-komparasi-sdlc" href="#">
+                Perbandingan Komprehensif SDLC: Waterfall, Spiral, dan Scrum dalam Rekayasa Perangkat Lunak Modern
+              </a>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+              Analisis matematis dan komparatif terhadap model sekuensial linier versus pendekatan berulang tangkas. Membahas trade-off biaya perubahan spesifikasi kebutuhan, toleransi risiko arsitektural, serta kesesuaian proyek berdasarkan kriteria kematangan domain bisnis.
+            </p>
+<div class="flex items-center justify-between text-on-surface-variant font-label-md text-label-md pt-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-outline">verified</span>
+<span>Ref: Pressman &amp; Maxim (2020), IEEE Std 1074</span>
+</div>
+<a class="text-secondary hover:text-primary font-semibold flex items-center gap-1" data-path="artikel-komparasi-sdlc" href="#">
+                Baca Lengkap <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Scholarly Item 2 -->
+<div class="p-6 bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-shadow">
+<div class="flex flex-wrap items-center gap-2 mb-2 font-label-sm text-label-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-semibold">Pemodelan UML</span>
+<span class="text-outline">•</span>
+<span class="text-on-surface-variant">Diperbarui: 08 Maret 2026</span>
+<span class="text-outline">•</span>
+<span class="text-on-surface-variant">Estimasi Baca: 15 menit</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 leading-snug">
+<a class="hover:text-primary transition-colors" data-path="artikel-use-case-uml" href="#">
+                Panduan Praktis Pemodelan Use Case Diagram &amp; Skenario Tekstual Sesuai Spesifikasi OMG UML 2.5
+              </a>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+              Membedah kesalahpahaman umum antara relasi <code>&lt;&lt;include&gt;&gt;</code> dan <code>&lt;&lt;extend&gt;&gt;</code>. Menyajikan template penulisan skenario Cockburn (Main Success Scenario, Extensions, Preconditions, Postconditions) yang siap diimplementasikan dalam dokumentasi tugas akhir.
+            </p>
+<div class="flex items-center justify-between text-on-surface-variant font-label-md text-label-md pt-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-outline">verified</span>
+<span>Ref: Object Management Group UML 2.5.1 Specification</span>
+</div>
+<a class="text-secondary hover:text-primary font-semibold flex items-center gap-1" data-path="artikel-use-case-uml" href="#">
+                Baca Lengkap <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Scholarly Item 3 -->
+<div class="p-6 bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-shadow">
+<div class="flex flex-wrap items-center gap-2 mb-2 font-label-sm text-label-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container text-tertiary-container font-semibold">Spesifikasi Kebutuhan</span>
+<span class="text-outline">•</span>
+<span class="text-on-surface-variant">Diperbarui: 27 Februari 2026</span>
+<span class="text-outline">•</span>
+<span class="text-on-surface-variant">Estimasi Baca: 10 menit</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 leading-snug">
+<a class="hover:text-primary transition-colors" data-path="artikel-elisitasi-srs" href="#">
+                Teknik Elisitasi Kebutuhan dan Penyusunan Software Requirements Specification (SRS) Berstandar IEEE 830
+              </a>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+              Petunjuk metodologis pelaksanaan wawancara mendalam, observasi pasif, dan Joint Application Development (JAD). Dilengkapi teknik verifikasi konsistensi menggunakan Requirements Traceability Matrix (RTM) guna mencegah <em>scope creep</em>.
+            </p>
+<div class="flex items-center justify-between text-on-surface-variant font-label-md text-label-md pt-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-outline">verified</span>
+<span>Ref: IEEE Recommended Practice for SRS (IEEE Std 830-1998)</span>
+</div>
+<a class="text-secondary hover:text-primary font-semibold flex items-center gap-1" data-path="artikel-elisitasi-srs" href="#">
+                Baca Lengkap <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Scholarly Item 4 -->
+<div class="p-6 bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-shadow">
+<div class="flex flex-wrap items-center gap-2 mb-2 font-label-sm text-label-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-semibold">Desain Basis Data</span>
+<span class="text-outline">•</span>
+<span class="text-on-surface-variant">Diperbarui: 19 Februari 2026</span>
+<span class="text-outline">•</span>
+<span class="text-on-surface-variant">Estimasi Baca: 14 menit</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 leading-snug">
+<a class="hover:text-primary transition-colors" data-path="artikel-skema-database" href="#">
+                Perancangan Skema Database Relasional: Transformasi ERD Konseptual ke Skema Fisik Termasuk Aturan Normalisasi 3NF
+              </a>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+              Panduan matematis transformasi entitas, kardinalitas 1:N dan M:N ke dalam tabel relasional. Langkah rinci pengujian redundansi data dari 1st Normal Form (1NF) menuju Boyce-Codd Normal Form (BCNF) beserta strategi pembuatan indeks performa.
+            </p>
+<div class="flex items-center justify-between text-on-surface-variant font-label-md text-label-md pt-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-outline">verified</span>
+<span>Ref: Elmasri &amp; Navathe, Fundamentals of Database Systems</span>
+</div>
+<a class="text-secondary hover:text-primary font-semibold flex items-center gap-1" data-path="artikel-skema-database" href="#">
+                Baca Lengkap <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Sidebar Column: Wikipedia-like Quick Index & Institutional Box (4 cols) -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Institutional Endorsement Panel -->
+<div class="bg-surface-container-low p-6 rounded-xl space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary text-on-primary flex items-center justify-center font-headline-sm font-bold text-lg">
+                IK
+              </div>
+<div>
+<h4 class="font-headline-sm text-base font-semibold text-on-surface">Institut Bisnis &amp; Informatika Kwik Kian Gie</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Fakultas Teknologi Informasi</p>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Seluruh materi ensiklopedia ini ditinjau secara berkala oleh tim dosen mata kuliah APSI untuk menjamin relevansi pedagogis dengan standar industri software engineering.
+            </p>
+<div class="pt-2">
+<a class="inline-flex items-center gap-2 font-label-md text-label-md text-primary font-semibold hover:underline" data-path="tentang-fanedu" href="#">
+<span class="material-symbols-outlined text-base">verified</span>
+                Pelajari Kebijakan Kurasi Akademik
+              </a>
+</div>
+</div>
+<!-- Visual Artifact Highlight: SVG Mini-Diagram -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-sm text-label-sm text-primary font-semibold uppercase tracking-wider">Artefak Model Terkini</span>
+<span class="font-code text-code text-xs text-outline">FIG. 1.4</span>
+</div>
+<h4 class="font-headline-sm text-base font-semibold text-on-surface mb-2">Pola Interaksi Sequence Diagram</h4>
+<!-- Inline Mini SVG Architectural Diagram -->
+<div class="bg-surface-container-low p-4 rounded-lg my-3 flex items-center justify-center">
+<svg class="w-full h-auto text-primary" fill="none" viewbox="0 0 320 140" xmlns="http://www.w3.org/2000/svg">
+<!-- Actor & Lifelines -->
+<rect class="fill-surface-container-lowest stroke-primary" height="24" rx="3" stroke-width="1.5" width="60" x="15" y="10"></rect>
+<text class="fill-on-surface font-code text-[10px] font-medium" text-anchor="middle" x="45" y="26">Actor:User</text>
+<line stroke="currentColor" stroke-dasharray="3 3" stroke-width="1" x1="45" x2="45" y1="34" y2="130"></line>
+<rect class="fill-surface-container-lowest stroke-secondary" height="24" rx="3" stroke-width="1.5" width="65" x="130" y="10"></rect>
+<text class="fill-on-surface font-code text-[10px] font-medium" text-anchor="middle" x="162" y="26">:Controller</text>
+<line stroke="currentColor" stroke-dasharray="3 3" stroke-width="1" x1="162" x2="162" y1="34" y2="130"></line>
+<rect class="fill-surface-container-lowest stroke-tertiary-container" height="24" rx="3" stroke-width="1.5" width="65" x="245" y="10"></rect>
+<text class="fill-on-surface font-code text-[10px] font-medium" text-anchor="middle" x="277" y="26">:DB_Engine</text>
+<line stroke="currentColor" stroke-dasharray="3 3" stroke-width="1" x1="277" x2="277" y1="34" y2="130"></line>
+<!-- Activation Boxes -->
+<rect class="fill-surface-variant stroke-secondary" height="65" rx="1" stroke-width="1" width="10" x="157" y="55"></rect>
+<rect class="fill-surface-variant stroke-tertiary-container" height="35" rx="1" stroke-width="1" width="10" x="272" y="70"></rect>
+<!-- Messages -->
+<path d="M 45 55 L 157 55" marker-end="url(#arrow)" stroke="currentColor" stroke-width="1.2"></path>
+<text class="fill-on-surface-variant font-code text-[8px]" text-anchor="middle" x="100" y="50">submitData()</text>
+<path d="M 167 75 L 272 75" stroke="currentColor" stroke-width="1.2"></path>
+<polygon class="fill-primary" points="272,75 266,72 266,78"></polygon>
+<text class="fill-on-surface-variant font-code text-[8px]" text-anchor="middle" x="220" y="70">save()</text>
+<path d="M 272 100 L 167 100" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1"></path>
+<polyline fill="none" points="172,97 167,100 172,103" stroke="currentColor" stroke-width="1"></polyline>
+<text class="fill-on-surface-variant font-code text-[8px]" text-anchor="middle" x="220" y="95">res: 201 Created</text>
+</svg>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Representasi siklus hidup objek dan pesan synchronous/asynchronous dalam arsitektur model-view-controller.
+            </p>
+<a class="mt-3 inline-block font-label-sm text-label-sm text-primary font-semibold hover:underline" data-path="diagram-sequence" href="#">
+              Jelajahi Notasi Diagram Sequence →
+            </a>
+</div>
+<!-- Academic Glossary Quick Jump -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<h4 class="font-headline-sm text-base font-semibold text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">format_list_bulleted</span>
+              Glosarium Istilah Kunci
+            </h4>
+<div class="space-y-2.5 font-body-sm text-body-sm">
+<div class="p-2 rounded bg-surface-container-low hover:bg-surface-container transition-colors">
+<span class="font-semibold text-on-surface block">Actor (UML)</span>
+<span class="text-on-surface-variant text-[12px]">Entitas luar yang berinteraksi langsung dengan sistem perangkat lunak.</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low hover:bg-surface-container transition-colors">
+<span class="font-semibold text-on-surface block">Kardinalitas (ERD)</span>
+<span class="text-on-surface-variant text-[12px]">Derajat keterhubungan relasi antar baris tabel (1:1, 1:N, N:M).</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low hover:bg-surface-container transition-colors">
+<span class="font-semibold text-on-surface block">Sprint Backlog</span>
+<span class="text-on-surface-variant text-[12px]">Daftar tugas terperinci yang disepakati untuk diselesaikan dalam 1 iterasi.</span>
+</div>
+</div>
+<a class="mt-4 inline-flex items-center gap-1 font-label-md text-label-md text-secondary font-semibold hover:underline" data-path="glosarium-apsi" href="#">
+              Buka Semua Istilah (A - Z)
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Search & Filter Behavior Microscript -->
+<script>
+    (function initFanEDUBeranda() {
+      const searchInput = document.getElementById('apsi-search-input');
+      const suggestions = document.getElementById('search-suggestions');
+      const clearBtn = document.getElementById('search-clear-btn');
+      const quickChips = document.querySelectorAll('.quick-chip');
+
+      if (!searchInput || !suggestions) return;
+
+      // Show predictive suggestions on typing or focus
+      searchInput.addEventListener('input', function(e) {
+        const val = e.target.value.trim();
+        if (val.length > 0) {
+          clearBtn.classList.remove('hidden');
+          suggestions.classList.remove('hidden');
+        } else {
+          clearBtn.classList.add('hidden');
+          suggestions.classList.add('hidden');
+        }
+      });
+
+      searchInput.addEventListener('focus', function() {
+        if (searchInput.value.trim().length > 0) {
+          suggestions.classList.remove('hidden');
+        }
+      });
+
+      // Clear button handler
+      clearBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        searchInput.focus();
+        clearBtn.classList.add('hidden');
+        suggestions.classList.add('hidden');
+      });
+
+      // Click outside to dismiss dropdown
+      document.addEventListener('click', function(event) {
+        if (!event.target.closest('#search-console-wrapper')) {
+          suggestions.classList.add('hidden');
+        }
+      });
+
+      // Quick chips auto-fill input and trigger search focus
+      quickChips.forEach(chip => {
+        chip.addEventListener('click', function() {
+          const query = this.getAttribute('data-query');
+          searchInput.value = query;
+          clearBtn.classList.remove('hidden');
+          suggestions.classList.remove('hidden');
+          searchInput.focus();
+        });
+      });
+
+      // ESC key accessibility
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          suggestions.classList.add('hidden');
+        }
+      });
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest border-t border-outline-variant/60 text-on-surface"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"><div class="space-y-3"><div class="flex items-center gap-2"><img alt="FanEDU Logo" class="h-6 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VVmGiDmxSW_LaPuzQQBjulBjF5u1Xwx_qtsO68yvIticqpuO2VhLrBghs0A_FXonuSBcTYquIlJ_LSlbSRKN_jmYRXTVyspVKA-NDZpakTwjgcsYxfgUh4z_8-5kU2bXps2ND3mTd6IlIfKZtRm86D_HrE58hRJR2bPafcGuHezMbXSWzqLwJy0u7jPFslggb57gRDZwU1HzYEb89aGCzbSI22gtJ1_5QwqZ3ZyxDgrDE72epI69OpPmw"/><span class="font-headline-sm text-headline-sm font-semibold text-primary">FanEDU</span></div><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Platform ensiklopedia kurasi akademik untuk mata kuliah Analisis dan Perancangan Sistem Informasi (APSI). Didedikasikan bagi riset, studi rekayasa perangkat lunak, dan standarisasi pemodelan.</p><div class="pt-1"><span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-low border border-outline-variant/60 font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[13px] mr-1 text-primary">verified</span>Lisensi Terbuka Akademik</span></div></div><div class="space-y-3"><h4 class="font-headline-sm text-base font-semibold text-on-surface">Kurikulum &amp; Topik Utama</h4><ul class="space-y-2 font-body-sm text-body-sm"><li class="text-on-surface-variant hover:text-primary transition-colors"><a data-path="jelajahi-topik" href="#">SDLC &amp; Metodologi Tangkas</a></li><li class="text-on-surface-variant hover:text-primary transition-colors"><a data-path="jelajahi-topik" href="#">Analisis Kebutuhan &amp; Dokumen SRS</a></li><li class="text-on-surface-variant hover:text-primary transition-colors"><a data-path="jelajahi-topik" href="#">Perancangan Berorientasi Objek UML</a></li><li class="text-on-surface-variant hover:text-primary transition-colors"><a data-path="jelajahi-topik" href="#">Pengujian Sistem &amp; Implementasi</a></li></ul></div><div class="space-y-3"><h4 class="font-headline-sm text-base font-semibold text-on-surface">Referensi Literatur</h4><ul class="space-y-2 font-body-sm text-body-sm"><li class="text-on-surface-variant"><span class="block text-on-surface font-medium">IEEE Computer Society</span>Standar SWEBOK Guide v3.0</li><li class="text-on-surface-variant"><span class="block text-on-surface font-medium">Object Management Group</span>OMG Unified Modeling Language (UML 2.5)</li><li class="text-on-surface-variant"><span class="block text-on-surface font-medium">Martin Fowler</span>Patterns of Enterprise Application Architecture</li><li class="text-on-surface-variant"><span class="block text-on-surface font-medium">IBM Systems Journal</span>Principles of Software Architecture</li></ul></div><div class="space-y-3"><h4 class="font-headline-sm text-base font-semibold text-on-surface">Kontak &amp; Afiliasi Akademik</h4><div class="p-3 rounded bg-surface-container-low border border-outline-variant/60 space-y-2"><div class="font-label-md text-label-md font-semibold text-on-surface">Institut Bisnis dan Informatika Kwik Kian Gie</div><p class="font-body-sm text-[12px] text-on-surface-variant">Program Studi Sistem Informasi / Teknik Informatika</p><div class="pt-1 border-t border-outline-variant/40"><span class="font-label-sm text-[11px] text-outline block">Email Peneliti &amp; Pengembang:</span><a class="font-code text-code text-[12px] text-primary hover:underline break-all" href="mailto:57250021@student.kwikkiangie.ac.id">57250021@student.kwikkiangie.ac.id</a></div></div></div></div><div class="mt-10 pt-6 border-t border-outline-variant/40 flex flex-col sm:flex-row items-center justify-between gap-4"><p class="font-body-sm text-body-sm text-on-surface-variant text-center sm:text-left">© 2026 FanEDU. Hak cipta akademik dilindungi. Institut Bisnis dan Informatika Kwik Kian Gie.</p><div class="flex items-center gap-3 font-code text-code text-[11px] text-outline"><span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>PHP Runtime</span><span>•</span><span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>Supabase DB Engine</span></div></div></div></footer></body></html>

@@ -1,0 +1,263 @@
+---
+name: Academic Scholarly Modern
+colors:
+  surface: '#faf8ff'
+  surface-dim: '#d2d9f4'
+  surface-bright: '#faf8ff'
+  surface-container-lowest: '#ffffff'
+  surface-container-low: '#f2f3ff'
+  surface-container: '#eaedff'
+  surface-container-high: '#e2e7ff'
+  surface-container-highest: '#dae2fd'
+  on-surface: '#131b2e'
+  on-surface-variant: '#444653'
+  inverse-surface: '#283044'
+  inverse-on-surface: '#eef0ff'
+  outline: '#757684'
+  outline-variant: '#c4c5d5'
+  surface-tint: '#3755c3'
+  primary: '#00288e'
+  on-primary: '#ffffff'
+  primary-container: '#1e40af'
+  on-primary-container: '#a8b8ff'
+  inverse-primary: '#b8c4ff'
+  secondary: '#0051d5'
+  on-secondary: '#ffffff'
+  secondary-container: '#316bf3'
+  on-secondary-container: '#fefcff'
+  tertiary: '#003c36'
+  on-tertiary: '#ffffff'
+  tertiary-container: '#00554e'
+  on-tertiary-container: '#5fcdbf'
+  error: '#ba1a1a'
+  on-error: '#ffffff'
+  error-container: '#ffdad6'
+  on-error-container: '#93000a'
+  primary-fixed: '#dde1ff'
+  primary-fixed-dim: '#b8c4ff'
+  on-primary-fixed: '#001453'
+  on-primary-fixed-variant: '#173bab'
+  secondary-fixed: '#dbe1ff'
+  secondary-fixed-dim: '#b4c5ff'
+  on-secondary-fixed: '#00174b'
+  on-secondary-fixed-variant: '#003ea8'
+  tertiary-fixed: '#89f5e7'
+  tertiary-fixed-dim: '#6bd8cb'
+  on-tertiary-fixed: '#00201d'
+  on-tertiary-fixed-variant: '#005049'
+  background: '#faf8ff'
+  on-background: '#131b2e'
+  surface-variant: '#dae2fd'
+typography:
+  display-lg:
+    fontFamily: Newsreader
+    fontSize: 48px
+    fontWeight: '600'
+    lineHeight: 56px
+  display-lg-mobile:
+    fontFamily: Newsreader
+    fontSize: 32px
+    fontWeight: '600'
+    lineHeight: 40px
+  headline-xl:
+    fontFamily: Newsreader
+    fontSize: 36px
+    fontWeight: '600'
+    lineHeight: 44px
+  headline-xl-mobile:
+    fontFamily: Newsreader
+    fontSize: 26px
+    fontWeight: '600'
+    lineHeight: 34px
+  headline-lg:
+    fontFamily: Newsreader
+    fontSize: 28px
+    fontWeight: '600'
+    lineHeight: 36px
+  headline-md:
+    fontFamily: Newsreader
+    fontSize: 22px
+    fontWeight: '600'
+    lineHeight: 30px
+  headline-sm:
+    fontFamily: Newsreader
+    fontSize: 18px
+    fontWeight: '600'
+    lineHeight: 26px
+  body-xl:
+    fontFamily: Newsreader
+    fontSize: 20px
+    fontWeight: '400'
+    lineHeight: 32px
+  body-lg:
+    fontFamily: Inter
+    fontSize: 16px
+    fontWeight: '400'
+    lineHeight: 26px
+  body-md:
+    fontFamily: Inter
+    fontSize: 14px
+    fontWeight: '400'
+    lineHeight: 22px
+  body-sm:
+    fontFamily: Inter
+    fontSize: 13px
+    fontWeight: '400'
+    lineHeight: 18px
+  label-lg:
+    fontFamily: Inter
+    fontSize: 14px
+    fontWeight: '500'
+    lineHeight: 20px
+  label-md:
+    fontFamily: Inter
+    fontSize: 12px
+    fontWeight: '500'
+    lineHeight: 16px
+  label-sm:
+    fontFamily: Inter
+    fontSize: 11px
+    fontWeight: '600'
+    lineHeight: 14px
+  code:
+    fontFamily: JetBrains Mono
+    fontSize: 13px
+    fontWeight: '400'
+    lineHeight: 20px
+rounded:
+  sm: 0.125rem
+  DEFAULT: 0.25rem
+  md: 0.375rem
+  lg: 0.5rem
+  xl: 0.75rem
+  full: 9999px
+spacing:
+  gutter: 1.5rem
+  gutter-sm: 1rem
+  gutter-lg: 2rem
+  margin: 1rem
+  margin-md: 2rem
+  margin-lg: 3rem
+  space-xs: 0.25rem
+  space-sm: 0.5rem
+  space-md: 1rem
+  space-lg: 1.5rem
+  space-xl: 2.5rem
+---
+
+## Brand & Style
+
+This design system serves an academic knowledge base and educational encyclopedia focused on Systems Analysis and Design (Analisis dan Perancangan Sistem Informasi / APSI). It bridges the structured, reference-grade rigor of a scholarly encyclopedia (drawing from Wikipedia's informational clarity) with the distraction-free search utility and functional minimalism of modern productivity tools.
+
+The target audience comprises computer science and information systems students, academic researchers, lecturers, and systems analysts. The interface evokes credibility, intellectual calm, focus, and structural order. 
+
+The aesthetic is **Modern Editorial / Scholarly Minimalist**:
+- High-contrast, legible typography pairing an authoritative editorial serif for long-form reading and knowledge headers with an ultra-clean, neutral sans-serif for UI controls, navigation chrome, and metadata.
+- Clean paper-like surfaces, understated separation lines, and strict avoidance of decorative skeuomorphism or loud gradients.
+- Visual elements emphasize density without clutter, hierarchical content navigation (tables of contents, breadcrumbs, cross-references), and precise metadata taxonomy (SDLC stages, UML modeling categories, design methodologies).
+
+## Colors
+
+The color palette prioritizes high-contrast legibility, cognitive endurance for long reading sessions, and clear categorical signaling.
+
+### Color Roles & Semantics
+- **Primary (`#1E40AF` - Academic Deep Navy):** Represents authoritative presence and brand identity. Used for primary interactive triggers, active navigation markers, key section labels, and prominent academic iconography.
+- **Secondary (`#2563EB` - Scholarly Blue):** Used for standard text links, focused outline rings, and interactive hover states.
+- **Tertiary (`#0D9488` - Deep Teal):** Serves analytical callouts, system methodology classifications, and verified state indicators.
+- **Neutrals:**
+  - Base Ink / Heading: `#0F172A` (Slate 900) for uncompromised readability against light surfaces.
+  - Body Text: `#334155` (Slate 700) for sustained reading comfort.
+  - Muted Text & Meta: `#64748B` (Slate 500) for timestamps, author attributions, and citation counts.
+  - Border Lines: `#E2E8F0` (Slate 200) for table rules, panel dividers, and structural bounding.
+  - Surfaces: `#FFFFFF` (Pure White) for document sheets and search containers; `#F8FAFC` (Slate 50) for canvas backgrounds; `#F1F5F9` (Slate 100) for sidebars, secondary panels, and code blocks.
+
+### Domain-Specific Semantic Badges
+- **SDLC Phases:** Deep Indigo (`bg-indigo-50 text-indigo-700 border-indigo-200`)
+- **UML & Modeling:** Azure (`bg-sky-50 text-sky-700 border-sky-200`)
+- **Methodologies (Agile, Waterfall, RAD):** Teal (`bg-teal-50 text-teal-700 border-teal-200`)
+- **Publication Statuses:**
+  - *Published / Peer-Reviewed:* Emerald (`bg-emerald-50 text-emerald-700 border-emerald-200`)
+  - *Draft / Working Paper:* Amber (`bg-amber-50 text-amber-700 border-amber-200`)
+  - *Archived / Deprecated:* Slate (`bg-slate-100 text-slate-600 border-slate-200`)
+- **Institutional Marker (IBIKKG):** Subdued Navy Slate badge with fine rule border (`bg-slate-900 text-white`).
+
+## Typography
+
+The typographic system utilizes a bifurcated architecture:
+1. **Editorial Serif (`Newsreader`):** Applied to encyclopedic article titles, section headers (H1–H4), conceptual definitions, and reading lead paragraphs (`body-xl`). The font conveys scholarly weight, rhythm, and fatigue-free long-form reading.
+2. **UI & Infrastructure Sans (`Inter`):** Applied to navigation, search query bars, tables of contents, technical metadata, labels, data tables, and interactive buttons.
+3. **Monospace (`JetBrains Mono`):** Dedicated to data modeling representations, schema definitions, pseudo-code, and formal system specification grammar.
+
+### Editorial Guidelines
+- Use italicized serif styles sparingly, reserving them for formal academic definitions, translated terminology (e.g., Indonesian to English technical terms), or book/standard citations.
+- Article body prose defaults to `16px` (`1rem`) on standard screens with an expansive `1.625` line height to ensure optimal scannability across multi-paragraph technical texts.
+- Headings maintain strict structural hierarchy with automatic anchor linking.
+
+## Layout & Spacing
+
+The layout is structured around an academic reading workbench:
+
+### Grid Architecture
+- **Desktop (1280px+):** 3-column asymmetric layout:
+  - Left Column (240px–280px fixed): Navigation taxonomy, institutional attribution (IBIKKG), and topic trees.
+  - Center Column (Max 780px fluid): Primary reading canvas formatted for optimal measure (65–75 characters per line).
+  - Right Column (220px–260px fixed): Sticky on-page Table of Contents (ToC), active reading progress, and citation jump links.
+- **Tablet (768px–1024px):** 2-column layout. The left navigation collapses into an off-canvas drawer; the ToC condenses into a sticky horizontal jump-bar.
+- **Mobile (< 768px):** Single-column stacked layout with full-width search banner, sticky compact header, and drawer-based chapter navigation.
+
+### Search-Centric Hero Layout
+- Inspired by Google’s minimalist paradigm, global discovery lives within an unadorned, prominent search bar positioned centrally in header viewports or at the apex of root topic hubs, featuring instant type-ahead filters for UML diagrams, definitions, and SDLC phases.
+
+## Elevation & Depth
+
+This system avoids heavy drop shadows, opting for **crisp planar boundaries and low-contrast surface tiers**:
+
+- **Depth via Tonal Surfaces:**
+  - `Surface 0 (Canvas):` `#F8FAFC`
+  - `Surface 1 (Document Base / Cards):` `#FFFFFF` with a hairline border (`1px solid #E2E8F0`).
+  - `Surface 2 (Sidebar / Inset Panels):` `#F1F5F9`
+- **Ghost Outlines:** Structural containment relies on precise `1px` borders (`#E2E8F0` and `#CBD5E1`) rather than dimensional shadows.
+- **Elevation Overlays:**
+  - *Dropdowns, Autocomplete & Modals:* Floating menus employ a discreet, non-distracting ambient shadow: `0 4px 20px -2px rgba(15, 23, 42, 0.08)` surrounded by a crisp `1px` border in `#E2E8F0`.
+  - *Active Article Panels / Focused State:* Outlines transition to `#2563EB` with an ambient focus ring `box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15)`.
+
+## Shapes
+
+The design system enforces a restrained, semi-sharp geometry (`roundedness: 1` — Soft / 4px base):
+- **Base UI elements (Buttons, Inputs, Badges):** `4px` (`rounded` or `0.25rem`) for a precise, authoritative, and clean scientific edge.
+- **Cards, Article Containers, Modals:** `8px` (`rounded-lg` or `0.5rem`) to soften larger surfaces without appearing overly playful or consumerist.
+- **Search Input Bar:** Retains a subtle `6px` radius to maintain a modern, utilitarian aesthetic while matching the rectangular nature of reference tables.
+- **Pills / Status Chips:** Strictly capped at `4px` to avoid hyper-casual capsule looks, preserving the aesthetic of formal catalogue indexing cards.
+
+## Components
+
+### Buttons
+- **Primary:** Background `#1E40AF`, text `#FFFFFF`, border-radius `4px`, padding `0.5rem 1rem`. Hover: `#1D4ED8`. Active: `#1E3A8A`.
+- **Secondary / Outline:** Background `#FFFFFF`, text `#0F172A`, border `1px solid #E2E8F0`. Hover: `#F8FAFC`, border `#CBD5E1`.
+- **Ghost / Link:** Text `#2563EB`, background transparent, underline on hover.
+
+### Global Search & Input Fields
+- Input boxes feature a background of `#FFFFFF`, border `1px solid #CBD5E1`, text `#0F172A`, and placeholder text `#94A3B8`.
+- Focus state: border `#2563EB` with `ring-2 ring-blue-100`.
+- Includes instant shortcut badges (`⌘K` / `Ctrl+K`) positioned on the trailing end using `font-mono text-xs text-slate-400`.
+
+### Badges & Taxonomic Tags
+- Compact dimensions: font `11px` (`label-sm`), font-weight `600`, padding `2px 8px`, border-radius `4px`.
+- Displayed with border stroke:
+  - *SDLC:* `bg-indigo-50 text-indigo-700 border border-indigo-200`
+  - *UML:* `bg-sky-50 text-sky-700 border border-sky-200`
+  - *Methodology:* `bg-teal-50 text-teal-700 border border-teal-200`
+  - *Status Published:* `bg-emerald-50 text-emerald-700 border border-emerald-200`
+  - *Status Draft:* `bg-amber-50 text-amber-700 border border-amber-200`
+
+### Institutional Badge (IBIKKG)
+- Rendered in a fixed institutional lockup: Crisp rectangular unit with a solid `#0F172A` ground, `#FFFFFF` crisp uppercase tracking (`tracking-wider text-xs`), and an adjacent thin hairline separator with the institutional campus label.
+
+### Encyclopedic Cards & Content Blocks
+- **Article Card:** Background `#FFFFFF`, border `1px solid #E2E8F0`, padding `1.25rem`. Transitions border color to `#94A3B8` on hover.
+- **Definition Callout Box:** Left-accented card with a `3px solid #1E40AF` left border, background `#F8FAFC`, inner padding `1rem 1.25rem`.
+- **UML Diagram Viewer Card:** Slate background (`#F8FAFC`), crisp bordered figure box with figure numbering (`Figure 2.1: Use Case Diagram`), caption in `body-sm text-slate-500`, and full-screen expansion toggle.
+
+### Lists & Navigation
+- **Table of Contents (ToC):** Clean vertical list, left-border indicator (`2px solid transparent`), transitioning to `#1E40AF` when scrolled into view. Text uses `label-md`, shifting from `#64748B` to `#0F172A font-semibold` when active.
+- **Academic Citation & Reference List:** Indented hanging paragraphs with linked DOIs or retrieval links styled in `#2563EB`.
