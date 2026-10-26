@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ViewScreen } from '../types';
+import { IbikkgLogo } from './IbikkgLogo';
 
 interface FooterProps {
   onNavigate: (view: ViewScreen) => void;
@@ -170,8 +171,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div className="space-y-3">
             <div className="flex items-center gap-3">
               <div className="h-12 w-12 rounded-lg bg-white border border-[#dfe1e5] p-1 flex items-center justify-center shrink-0 shadow-xs">
-                <img
-                  src="/assets/aistudio/image_01a9bdac.png"
+                <IbikkgLogo
                   alt="Institut Bisnis dan Informatika Kwik Kian Gie"
                   className="h-full w-full object-contain"
                 />

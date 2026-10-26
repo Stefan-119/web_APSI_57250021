@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { IbikkgLogo } from './IbikkgLogo';
 
 interface AuthModalProps {
   isOpen: boolean;
   initialMode: 'login' | 'register';
   onClose: () => void;
+}
+
+interface ParsedAuthError {
+  userMessage: string;
+  technicalCode?: string;
+  isDomainError?: boolean;
+  isProviderError?: boolean;
 }
 
 export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialMode, onClose }) => {
@@ -14,7 +22,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialMode, onClo
   const [nim, setNim] = useState('');
   const [fullName, setFullName] = useState('');
   const [submitting, setSubmitting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorState, setErrorState] = useState<ParsedAuthError | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const { registerWithEmail, loginWithEmail, loginWithGoogle } = useAuth();
@@ -26,7 +34,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialMode, onClo
     setPassword('');
     setNim('');
     setFullName('');
-    setErrorMessage(null);
+    setErrorState(null);
     setSuccessMessage(null);
   };
 
@@ -35,45 +43,98 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialMode, onClo
     onClose();
   };
 
-  const mapFirebaseError = (err: unknown): string => {
-    const msg = err instanceof Error ? err.message : String(err);
-    if (msg.includes('auth/invalid-credential') || msg.includes('auth/wrong-password') || msg.includes('auth/user-not-found')) {
-      return 'Email atau kata sandi yang Anda masukkan tidak sesuai.';
+  const mapFirebaseError = (err: unknown): ParsedAuthError => {
+    const raw = err instanceof Error ? err.message : String(err);
+
+    if (raw.includes('auth/unauthorized-domain')) {
+      return {
+        userMessage: 'Domain "stefan-119.github.io" belum terdaftar dalam Authorized Domains Firebase Authentication.',
+        technicalCode: 'auth/unauthorized-domain',
+        isDomainError: true,
+      };
     }
-    if (msg.includes('auth/email-already-in-use')) {
-      return 'Email ini telah terdaftar. Silakan gunakan menu Masuk atau gunakan email lain.';
+    if (raw.includes('auth/operation-not-allowed')) {
+      return {
+        userMessage: 'Metode masuk ini (Email/Password atau Google) belum diaktifkan di Firebase Console.',
+        technicalCode: 'auth/operation-not-allowed',
+        isProviderError: true,
+      };
     }
-    if (msg.includes('auth/weak-password')) {
-      return 'Kata sandi terlalu pendek. Gunakan minimal 6 karakter.';
+    if (raw.includes('auth/invalid-credential') || raw.includes('auth/wrong-password') || raw.includes('auth/user-not-found')) {
+      return {
+        userMessage: 'Email atau kata sandi yang Anda masukkan tidak sesuai.',
+        technicalCode: 'auth/invalid-credential',
+      };
     }
-    if (msg.includes('auth/invalid-email')) {
-      return 'Format alamat email tidak valid.';
+    if (raw.includes('auth/email-already-in-use')) {
+      return {
+        userMessage: 'Alamat email ini telah terdaftar. Silakan gunakan tab "Masuk ke Akun".',
+        technicalCode: 'auth/email-already-in-use',
+      };
     }
-    if (msg.includes('popup-closed-by-user')) {
-      return 'Jendela autentikasi ditutup sebelum proses selesai.';
+    if (raw.includes('auth/weak-password')) {
+      return {
+        userMessage: 'Kata sandi terlalu pendek. Gunakan minimal 6 karakter.',
+        technicalCode: 'auth/weak-password',
+      };
     }
-    return 'Terjadi kendala saat menghubungkan ke basis data. Silakan coba kembali.';
+    if (raw.includes('auth/invalid-email')) {
+      return {
+        userMessage: 'Format alamat email tidak valid.',
+        technicalCode: 'auth/invalid-email',
+      };
+    }
+    if (raw.includes('popup-closed-by-user')) {
+      return {
+        userMessage: 'Jendela autentikasi ditutup sebelum proses selesai.',
+        technicalCode: 'auth/popup-closed-by-user',
+      };
+    }
+    if (raw.includes('popup-blocked')) {
+      return {
+        userMessage: 'Jendela popup Google masuk diblokir oleh peramban. Harap izinkan pop-up.',
+        technicalCode: 'auth/popup-blocked',
+      };
+    }
+    if (raw.includes('auth/network-request-failed')) {
+      return {
+        userMessage: 'Koneksi jaringan terputus atau diblokir. Periksa koneksi internet Anda.',
+        technicalCode: 'auth/network-request-failed',
+      };
+    }
+    if (raw.includes('permission-denied') || raw.includes('Missing or insufficient permissions')) {
+      return {
+        userMessage: 'Akses Firestore ditolak oleh aturan keamanan.',
+        technicalCode: 'firestore/permission-denied',
+      };
+    }
+
+    // Fallback with visible technical code to prevent guessing
+    return {
+      userMessage: 'Terjadi kendala saat menghubungkan ke Firebase. Periksa konfigurasi proyek Anda.',
+      technicalCode: raw.slice(0, 120),
+    };
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErrorMessage(null);
+    setErrorState(null);
     setSubmitting(true);
 
     try {
       if (mode === 'register') {
         if (!fullName.trim()) {
-          setErrorMessage('Nama lengkap wajib diisi.');
+          setErrorState({ userMessage: 'Nama lengkap wajib diisi.' });
           setSubmitting(false);
           return;
         }
         if (!nim.trim()) {
-          setErrorMessage('Nomor Induk Mahasiswa (NIM) wajib diisi.');
+          setErrorState({ userMessage: 'Nomor Induk Mahasiswa (NIM) wajib diisi.' });
           setSubmitting(false);
           return;
         }
         await registerWithEmail(email, password, fullName, nim);
-        setSuccessMessage('Pendaftaran berhasil! Akun dan profil mahasiswa telah tersimpan di basis data.');
+        setSuccessMessage('Pendaftaran berhasil! Akun dan profil mahasiswa telah tersimpan.');
       } else {
         await loginWithEmail(email, password);
         setSuccessMessage('Autentikasi berhasil! Selamat datang kembali di FanEDU APSI.');
@@ -83,14 +144,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialMode, onClo
         handleClose();
       }, 1400);
     } catch (err) {
-      setErrorMessage(mapFirebaseError(err));
+      setErrorState(mapFirebaseError(err));
     } finally {
       setSubmitting(false);
     }
   };
 
   const handleGoogleSignIn = async () => {
-    setErrorMessage(null);
+    setErrorState(null);
     setSubmitting(true);
     try {
       await loginWithGoogle();
@@ -99,7 +160,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialMode, onClo
         handleClose();
       }, 1400);
     } catch (err) {
-      setErrorMessage(mapFirebaseError(err));
+      setErrorState(mapFirebaseError(err));
     } finally {
       setSubmitting(false);
     }
@@ -116,8 +177,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialMode, onClo
         <div className="p-5 sm:p-6 bg-[#f2f3ff] border-b border-[#c4c5d5]/60 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-white border border-[#dfe1e5] p-1 flex items-center justify-center shrink-0 shadow-2xs">
-              <img
-                src="/assets/aistudio/image_01a9bdac.png"
+              <IbikkgLogo
                 alt="Logo IBIKKG Kwik Kian Gie"
                 className="h-full w-full object-contain"
               />
@@ -163,7 +223,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialMode, onClo
                   type="button"
                   onClick={() => {
                     setMode('login');
-                    setErrorMessage(null);
+                    setErrorState(null);
                   }}
                   className={`flex-1 pb-2.5 text-xs font-semibold text-center border-b-2 transition-colors ${
                     mode === 'login'
@@ -177,7 +237,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialMode, onClo
                   type="button"
                   onClick={() => {
                     setMode('register');
-                    setErrorMessage(null);
+                    setErrorState(null);
                   }}
                   className={`flex-1 pb-2.5 text-xs font-semibold text-center border-b-2 transition-colors ${
                     mode === 'register'
@@ -189,13 +249,51 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, initialMode, onClo
                 </button>
               </div>
 
-              {/* Error Alert */}
-              {errorMessage && (
-                <div className="mb-4 p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2">
-                  <span className="material-symbols-outlined text-base text-rose-600 shrink-0">
-                    error
-                  </span>
-                  <span className="leading-snug">{errorMessage}</span>
+              {/* Enhanced Error Alert with Technical Details & Actionable Solutions */}
+              {errorState && (
+                <div className="mb-4 p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 text-xs space-y-2">
+                  <div className="flex items-start gap-2">
+                    <span className="material-symbols-outlined text-base text-rose-600 shrink-0 mt-0.5">
+                      error
+                    </span>
+                    <div className="flex-1">
+                      <p className="font-semibold leading-snug">{errorState.userMessage}</p>
+                      {errorState.technicalCode && (
+                        <span className="inline-block mt-1 px-1.5 py-0.5 bg-rose-100/80 rounded font-mono text-[10px] text-rose-900 border border-rose-200">
+                          Kode: {errorState.technicalCode}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* GitHub Pages Authorized Domain Solution Box */}
+                  {errorState.isDomainError && (
+                    <div className="mt-2 p-2.5 bg-white rounded border border-rose-300 text-[11px] text-slate-800 space-y-1.5">
+                      <div className="font-bold text-[#00288e] flex items-center gap-1">
+                        <span className="material-symbols-outlined text-sm">verified_user</span>
+                        Solusi Otorisasi Domain di Firebase Console (1 Menit):
+                      </div>
+                      <ol className="list-decimal list-inside space-y-1 text-slate-700 pl-1 leading-relaxed">
+                        <li>Buka <strong>Firebase Console</strong> &gt; Project <strong>web-apsi-57250021</strong></li>
+                        <li>Pilih <strong>Authentication</strong> &gt; Tab <strong>Settings</strong></li>
+                        <li>Cari bagian <strong>Authorized domains</strong> &gt; Klik <strong>Add domain</strong></li>
+                        <li>Masukkan: <code className="bg-slate-100 px-1 py-0.5 rounded font-bold text-blue-700">stefan-119.github.io</code></li>
+                        <li>Klik <strong>Save</strong> lalu refresh halaman ini.</li>
+                      </ol>
+                    </div>
+                  )}
+
+                  {/* Provider disabled solution box */}
+                  {errorState.isProviderError && (
+                    <div className="mt-2 p-2.5 bg-white rounded border border-rose-300 text-[11px] text-slate-800 space-y-1">
+                      <div className="font-bold text-[#00288e]">
+                        Solusi Mengaktifkan Login Provider:
+                      </div>
+                      <p className="text-slate-700 leading-relaxed">
+                        Buka Firebase Console &gt; <strong>Authentication</strong> &gt; Tab <strong>Sign-in method</strong>, lalu klik <strong>Email/Password</strong> dan <strong>Google</strong> untuk mengaktifkannya (Enable &rarr; Save).
+                      </p>
+                    </div>
+                  )}
                 </div>
               )}
 

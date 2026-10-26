@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ViewScreen } from '../types';
 import { useAuth } from '../context/AuthContext';
+import { IbikkgLogo } from './IbikkgLogo';
 
 interface HeaderProps {
   currentView: ViewScreen;
@@ -76,8 +77,7 @@ export const Header: React.FC<HeaderProps> = ({
             title="FanEDU - Beranda"
           >
             <div className="h-10 w-10 flex items-center justify-center p-0.5 rounded-lg bg-white border border-[#dfe1e5] shadow-xs group-hover:border-[#00288e] transition-colors">
-              <img
-                src="/assets/aistudio/image_01a9bdac.png"
+              <IbikkgLogo
                 alt="Logo IBIKKG Kwik Kian Gie"
                 className="h-full w-full object-contain"
               />

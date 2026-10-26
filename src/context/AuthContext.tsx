@@ -106,7 +106,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       await setDoc(doc(db, 'users', cred.user.uid), newProfile);
     } catch (err) {
-      handleFirestoreError(err, OperationType.WRITE, path);
+      console.warn('Could not save user profile directly to Firestore (continuing with local profile):', err);
     }
     setUserProfile(newProfile);
   };
