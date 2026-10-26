@@ -1,12 +1,12 @@
 {
-  "projectId": "chromatic-falcon-301dl",
-  "appId": "1:304662382118:web:3f7c18b62f7abdec37c8e7",
-  "apiKey": "AIzaSyBOKXFYL426bHFeJV_8uiYW4YXcga4rgXI",
-  "authDomain": "chromatic-falcon-301dl.firebaseapp.com",
-  "firestoreDatabaseId": "ai-studio-faneduensikloped-f9b1e9cf-4fba-4fd6-b9d2-fb9ae8eb049e",
-  "storageBucket": "chromatic-falcon-301dl.firebasestorage.app",
-  "messagingSenderId": "304662382118",
+  "projectId": "web-apsi-57250021",
+  "appId": "1:606422247095:web:31b16abe849771e3e3cf32",
+  "apiKey": "AIzaSyDKbNdEPnnXZGkSSEga8eEfQNswWr1FtxI",
+  "authDomain": "web-apsi-57250021.firebaseapp.com",
+  "firestoreDatabaseId": "ai-studio-webapsi57250021-a2d86da8-b302-4d53-bd08-b68215b8bae4",
+  "storageBucket": "web-apsi-57250021.firebasestorage.app",
+  "messagingSenderId": "606422247095",
   "measurementId": "",
-  "oAuthClientId": "304662382118-518rvmqss646hu8n526ejsjiqn7njb3m.apps.googleusercontent.com",
+  "oAuthClientId": "606422247095-ql6krpu9cm00t4r1rb6jc2tqa0gqvu02.apps.googleusercontent.com",
   "recaptchaSiteKey": ""
 }
