@@ -51,10 +51,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   </span>
                 </div>
                 <a
-                  href="mailto:57250021@kwikkiangie.ac.id"
+                  href="mailto:57250021@student.kwikkiangie.ac.id"
                   className="font-mono text-xs text-[#0051d5] hover:underline font-semibold block break-all"
                 >
-                  57250021@kwikkiangie.ac.id
+                  57250021@student.kwikkiangie.ac.id
                 </a>
                 <span className="text-[11px] text-[#757684] block">
                   Institut Bisnis dan Informatika Kwik Kian Gie &bull; Prodi Sistem Informasi / TI
@@ -70,7 +70,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 Formulir Masukan &amp; Berlangganan Update
               </h4>
               <p className="text-xs text-[#444653] mb-4">
-                Pesan akan langsung diarahkan ke email akademik <code>57250021@kwikkiangie.ac.id</code>.
+                Pesan akan langsung diarahkan ke email akademik <code>57250021@student.kwikkiangie.ac.id</code>.
               </p>
 
               {feedbackStatus === 'success' ? (
@@ -80,7 +80,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                     Umpan Balik Berhasil Terkirim!
                   </div>
                   <p className="leading-relaxed">
-                    Terima kasih atas kontribusi Anda. Masukan materi telah berhasil disampaikan ke tim kurasi akademik IBIKKG melalui <strong>57250021@kwikkiangie.ac.id</strong>. Kami akan segera meninjau catatan Anda.
+                    Terima kasih atas kontribusi Anda. Masukan materi telah berhasil disampaikan ke tim kurasi akademik IBIKKG melalui <strong>57250021@student.kwikkiangie.ac.id</strong>. Kami akan segera meninjau catatan Anda.
                   </p>
                   <button
                     onClick={() => {
@@ -147,10 +147,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                     </p>
                   )}
 
-                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
-                    <span className="text-[11px] text-[#757684]">
-                      Tujuan: <strong className="text-[#131b2e]">57250021@kwikkiangie.ac.id</strong>
-                    </span>
+                  <div className="flex justify-end pt-1">
                     <button
                       type="submit"
                       className="w-full sm:w-auto px-5 py-2.5 bg-[#00288e] hover:bg-[#1e40af] text-white rounded-lg text-xs font-semibold transition-colors shadow-xs flex items-center justify-center gap-1.5"
