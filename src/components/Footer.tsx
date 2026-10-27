@@ -10,15 +10,60 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const [feedbackEmail, setFeedbackEmail] = useState('');
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const [feedbackCategory, setFeedbackCategory] = useState('Pertanyaan Materi APSI');
-  const [feedbackStatus, setFeedbackStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [feedbackStatus, setFeedbackStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmitFeedback = (e: React.FormEvent) => {
+  const targetEmail = '57250021@student.kwikkiangie.ac.id';
+
+  const mailtoFallbackUrl = `mailto:${targetEmail}?subject=${encodeURIComponent(
+    `[FanEDU Masukan] ${feedbackCategory}`
+  )}&body=${encodeURIComponent(
+    `Pengirim: ${feedbackEmail}\nKategori: ${feedbackCategory}\n\nPesan:\n${feedbackMessage}`
+  )}`;
+
+  const handleSubmitFeedback = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!feedbackEmail || !feedbackEmail.includes('@')) {
+    if (!feedbackEmail || !feedbackEmail.includes('@') || !feedbackEmail.includes('.')) {
       setFeedbackStatus('error');
+      setErrorMessage('Harap masukkan alamat email yang valid.');
       return;
     }
-    setFeedbackStatus('success');
+    if (!feedbackMessage.trim()) {
+      setFeedbackStatus('error');
+      setErrorMessage('Pesan masukan tidak boleh kosong.');
+      return;
+    }
+
+    setFeedbackStatus('loading');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          'Email Pengirim': feedbackEmail,
+          'Kategori Masukan': feedbackCategory,
+          'Isi Pesan': feedbackMessage,
+          _subject: `[FanEDU Feedback] ${feedbackCategory} - dari ${feedbackEmail}`,
+          _template: 'table',
+        }),
+      });
+
+      if (response.ok) {
+        setFeedbackStatus('success');
+      } else {
+        setFeedbackStatus('error');
+        setErrorMessage('Server pengiriman sibuk. Anda dapat mengirimkan langsung melalui aplikasi email Anda.');
+      }
+    } catch (err) {
+      console.warn('Network send error, offering mailto fallback:', err);
+      setFeedbackStatus('error');
+      setErrorMessage('Koneksi terputus. Silakan klik tombol Buka di Aplikasi Email untuk mengirim langsung.');
+    }
   };
 
   return (
@@ -77,21 +122,31 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <div className="p-5 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-emerald-800 space-y-2 animate-in fade-in">
                   <div className="flex items-center gap-2 font-bold text-sm text-emerald-900">
                     <span className="material-symbols-outlined text-xl">check_circle</span>
-                    Umpan Balik Berhasil Terkirim!
+                    Umpan Balik Berhasil Terkirim ke Email!
                   </div>
                   <p className="leading-relaxed">
-                    Terima kasih atas kontribusi Anda. Masukan materi telah berhasil disampaikan ke tim kurasi akademik IBIKKG melalui <strong>57250021@student.kwikkiangie.ac.id</strong>. Kami akan segera meninjau catatan Anda.
+                    Terima kasih atas kontribusi Anda. Masukan materi telah berhasil dikirimkan ke kotak masuk <strong>{targetEmail}</strong>. Tim peneliti dan laboratorium IBIKKG akan segera meninjau catatan Anda.
                   </p>
-                  <button
-                    onClick={() => {
-                      setFeedbackStatus('idle');
-                      setFeedbackMessage('');
-                      setFeedbackEmail('');
-                    }}
-                    className="mt-3 text-xs text-[#0051d5] font-semibold hover:underline"
-                  >
-                    Kirim masukan lainnya
-                  </button>
+                  <div className="flex flex-wrap items-center gap-4 pt-2">
+                    <button
+                      onClick={() => {
+                        setFeedbackStatus('idle');
+                        setFeedbackMessage('');
+                        setFeedbackEmail('');
+                        setErrorMessage('');
+                      }}
+                      className="text-xs text-[#0051d5] font-semibold hover:underline"
+                    >
+                      Kirim masukan lainnya
+                    </button>
+                    <a
+                      href={mailtoFallbackUrl}
+                      className="text-xs text-[#757684] hover:text-[#00288e] flex items-center gap-1 font-medium hover:underline"
+                    >
+                      <span className="material-symbols-outlined text-sm">open_in_new</span>
+                      Buka salinan di aplikasi email (Gmail / Outlook)
+                    </a>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmitFeedback} className="space-y-3.5">
@@ -103,10 +158,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                       <input
                         type="email"
                         required
+                        disabled={feedbackStatus === 'loading'}
                         value={feedbackEmail}
                         onChange={(e) => setFeedbackEmail(e.target.value)}
                         placeholder="nama@student.kwikkiangie.ac.id"
-                        className="w-full px-3 py-2 bg-slate-50 border border-[#dfe1e5] rounded-lg text-xs text-[#131b2e] placeholder:text-[#9aa0a6] focus:outline-none focus:border-[#00288e] focus:bg-white"
+                        className="w-full px-3 py-2 bg-slate-50 border border-[#dfe1e5] rounded-lg text-xs text-[#131b2e] placeholder:text-[#9aa0a6] focus:outline-none focus:border-[#00288e] focus:bg-white disabled:opacity-60"
                       />
                     </div>
                     <div>
@@ -114,9 +170,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                         Kategori Masukan
                       </label>
                       <select
+                        disabled={feedbackStatus === 'loading'}
                         value={feedbackCategory}
                         onChange={(e) => setFeedbackCategory(e.target.value)}
-                        className="w-full px-3 py-2 bg-slate-50 border border-[#dfe1e5] rounded-lg text-xs text-[#131b2e] focus:outline-none focus:border-[#00288e] focus:bg-white"
+                        className="w-full px-3 py-2 bg-slate-50 border border-[#dfe1e5] rounded-lg text-xs text-[#131b2e] focus:outline-none focus:border-[#00288e] focus:bg-white disabled:opacity-60"
                       >
                         <option>Pertanyaan Materi APSI</option>
                         <option>Usulan Penambahan Modul</option>
@@ -134,26 +191,46 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                     <textarea
                       rows={3}
                       required
+                      disabled={feedbackStatus === 'loading'}
                       value={feedbackMessage}
                       onChange={(e) => setFeedbackMessage(e.target.value)}
                       placeholder="Tuliskan saran, pertanyaan materi, atau revisi diagram..."
-                      className="w-full px-3 py-2 bg-slate-50 border border-[#dfe1e5] rounded-lg text-xs text-[#131b2e] placeholder:text-[#9aa0a6] focus:outline-none focus:border-[#00288e] focus:bg-white"
+                      className="w-full px-3 py-2 bg-slate-50 border border-[#dfe1e5] rounded-lg text-xs text-[#131b2e] placeholder:text-[#9aa0a6] focus:outline-none focus:border-[#00288e] focus:bg-white disabled:opacity-60"
                     />
                   </div>
 
                   {feedbackStatus === 'error' && (
-                    <p className="text-xs text-red-600 font-medium">
-                      Harap masukkan alamat email yang valid.
-                    </p>
+                    <div className="p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                      <div className="flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-sm text-rose-600">error</span>
+                        <span>{errorMessage || 'Harap masukkan data dengan lengkap.'}</span>
+                      </div>
+                      <a
+                        href={mailtoFallbackUrl}
+                        className="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white rounded font-semibold text-[11px] transition-colors shrink-0"
+                      >
+                        Buka di Aplikasi Email &rarr;
+                      </a>
+                    </div>
                   )}
 
                   <div className="flex justify-end pt-1">
                     <button
                       type="submit"
-                      className="w-full sm:w-auto px-5 py-2.5 bg-[#00288e] hover:bg-[#1e40af] text-white rounded-lg text-xs font-semibold transition-colors shadow-xs flex items-center justify-center gap-1.5"
+                      disabled={feedbackStatus === 'loading'}
+                      className="w-full sm:w-auto px-5 py-2.5 bg-[#00288e] hover:bg-[#1e40af] text-white rounded-lg text-xs font-semibold transition-colors shadow-xs flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                     >
-                      <span className="material-symbols-outlined text-sm">send</span>
-                      Kirim Masukan ke Email Tertera
+                      {feedbackStatus === 'loading' ? (
+                        <>
+                          <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                          <span>Mengirim ke Email...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="material-symbols-outlined text-sm">send</span>
+                          <span>Kirim Masukan ke Email Tertera</span>
+                        </>
+                      )}
                     </button>
                   </div>
                 </form>
