@@ -122,6 +122,16 @@ export const Header: React.FC<HeaderProps> = ({
           >
             Artikel
           </button>
+          <button
+            onClick={() => onNavigate('dashboard')}
+            className={`h-full inline-flex items-center text-sm font-medium transition-colors border-b-2 ${
+              currentView === 'dashboard'
+                ? 'text-[#00288e] font-semibold border-[#00288e]'
+                : 'text-[#444653] hover:text-[#131b2e] border-transparent'
+            }`}
+          >
+            Dashboard
+          </button>
         </nav>
 
         {/* Google-Inspired Minimalist Search Bar in Navbar & Utility Controls */}
@@ -205,6 +215,16 @@ export const Header: React.FC<HeaderProps> = ({
 
                   {/* Quick Feature Navigation */}
                   <div className="space-y-1 mb-2">
+                    <button
+                      onClick={() => {
+                        setProfileDropdownOpen(false);
+                        onNavigate('dashboard');
+                      }}
+                      className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-xs font-semibold text-[#00288e] bg-[#f2f3ff] hover:bg-[#eaedff] transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-base text-[#00288e]">dashboard</span>
+                      Buka Dashboard Akademik
+                    </button>
                     <button
                       onClick={() => {
                         setProfileDropdownOpen(false);
@@ -348,6 +368,15 @@ export const Header: React.FC<HeaderProps> = ({
             className="w-full text-left py-2 px-3 rounded hover:bg-[#f2f3ff] text-sm font-medium text-[#131b2e]"
           >
             Artikel
+          </button>
+          <button
+            onClick={() => {
+              onNavigate('dashboard');
+              setMobileMenuOpen(false);
+            }}
+            className="w-full text-left py-2 px-3 rounded hover:bg-[#f2f3ff] text-sm font-semibold text-[#00288e] bg-[#f2f3ff]/50"
+          >
+            Dashboard
           </button>
           <button
             onClick={() => {

@@ -9,6 +9,8 @@ import { ARTICLES_DATA } from './data/mockApsiData';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BerandaView } from './components/BerandaView';
+import { db } from './lib/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 // Code-split secondary views and modals to minimize initial bundle size and maximize Lighthouse score
 const WikipediaArticleView = lazy(() =>
@@ -23,6 +25,9 @@ const NewsletterScreenView = lazy(() =>
 const DiagramStudioView = lazy(() =>
   import('./components/DiagramStudioView').then((m) => ({ default: m.DiagramStudioView }))
 );
+const DashboardView = lazy(() =>
+  import('./components/DashboardView').then((m) => ({ default: m.DashboardView }))
+);
 const GlossaryModal = lazy(() =>
   import('./components/GlossaryModal').then((m) => ({ default: m.GlossaryModal }))
 );
@@ -35,6 +40,7 @@ const CommandPalette = lazy(() =>
 
 export default function App() {
   const [currentView, setCurrentView] = useState<ViewScreen>('beranda');
+  const [articles, setArticles] = useState<Article[]>(ARTICLES_DATA);
   const [selectedArticle, setSelectedArticle] = useState<Article>(ARTICLES_DATA[0]);
   const [searchQuery, setSearchQuery] = useState('');
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
@@ -43,6 +49,63 @@ export default function App() {
     isOpen: false,
     mode: 'login',
   });
+
+  // Sync custom articles from Firestore asynchronously
+  useEffect(() => {
+    const syncArticles = async () => {
+      try {
+        const snap = await getDocs(collection(db, 'articles'));
+        if (!snap.empty) {
+          const remoteArticles: Article[] = [];
+          snap.forEach((docSnap) => {
+            const data = docSnap.data();
+            // Check if already in ARTICLES_DATA
+            const existing = ARTICLES_DATA.find((a) => a.id === docSnap.id);
+            if (existing) {
+              remoteArticles.push({
+                ...existing,
+                title: data.title || existing.title,
+                summary: data.summary || existing.summary,
+                moduleCode: data.moduleCode || existing.moduleCode,
+                category: data.category || existing.category,
+                reference: data.reference || existing.reference,
+                author: data.author || existing.author,
+              });
+            } else {
+              remoteArticles.push({
+                id: docSnap.id,
+                slug: data.title ? data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : docSnap.id,
+                title: data.title || 'Materi Silabus',
+                moduleCode: data.moduleCode || 'MOD-09',
+                category: data.category || 'Pemodelan Sistem & UML',
+                summary: data.summary || 'Ringkasan materi kurikulum.',
+                readTimeMinutes: 10,
+                updatedDate: data.updatedDate || '2025',
+                reference: data.reference || 'Dennis et al., Systems Analysis and Design.',
+                author: data.author || 'Tutor APSI',
+                sections: [
+                  {
+                    id: 'sec-1',
+                    title: 'Uraian Materi',
+                    content: [data.summary || 'Konten materi akademik.'],
+                  },
+                ],
+                citations: [{ id: 1, text: data.reference || 'Silabus APSI IBIKKG' }],
+              });
+            }
+          });
+
+          // Merge: remote custom articles + any static articles not yet overridden
+          const remoteIds = new Set(remoteArticles.map((a) => a.id));
+          const merged = [...remoteArticles, ...ARTICLES_DATA.filter((a) => !remoteIds.has(a.id))];
+          setArticles(merged);
+        }
+      } catch (err) {
+        // Fallback to ARTICLES_DATA seamlessly
+      }
+    };
+    syncArticles();
+  }, []);
 
   // Global Ctrl+K / Cmd+K key listener
   useEffect(() => {
@@ -75,7 +138,7 @@ export default function App() {
     setSearchQuery(query);
     const q = query.toLowerCase().trim();
     if (q) {
-      const match = ARTICLES_DATA.find((a) =>
+      const match = articles.find((a) =>
         a.title.toLowerCase().includes(q) ||
         a.summary.toLowerCase().includes(q) ||
         a.category.toLowerCase().includes(q)
@@ -124,6 +187,16 @@ export default function App() {
                 article={selectedArticle}
                 onSelectArticle={handleSelectArticle}
                 onNavigate={handleNavigate}
+              />
+            )}
+
+            {currentView === 'dashboard' && (
+              <DashboardView
+                onNavigate={handleNavigate}
+                onSelectArticle={handleSelectArticle}
+                onOpenAuth={(mode) => setAuthModal({ isOpen: true, mode })}
+                articles={articles}
+                onArticlesChange={setArticles}
               />
             )}
 

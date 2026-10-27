@@ -1,3 +1,14 @@
+export type UserRole = 'student' | 'tutor' | 'admin';
+
+export interface UserProfile {
+  uid: string;
+  fullName: string;
+  nim?: string;
+  email: string;
+  role: UserRole;
+  createdAt?: string;
+}
+
 export interface Article {
   id: string;
   slug: string;
@@ -11,6 +22,7 @@ export interface Article {
   reference: string;
   doi?: string;
   author?: string;
+  authorId?: string;
   infobox?: {
     standard: string;
     domain: string;
@@ -75,4 +87,5 @@ export type ViewScreen =
   | 'google-search' 
   | 'newsletter' 
   | 'diagram-studio'
-  | 'glosarium';
+  | 'glosarium'
+  | 'dashboard';

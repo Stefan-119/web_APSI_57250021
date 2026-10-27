@@ -2,7 +2,7 @@
   "entities": {
     "UserProfile": {
       "title": "UserProfile",
-      "description": "User profile record for students and academic members",
+      "description": "User profile record for students, tutors, and administrators",
       "type": "object",
       "properties": {
         "uid": {
@@ -12,12 +12,12 @@
         },
         "fullName": {
           "type": "string",
-          "description": "Full name of the student or member",
+          "description": "Full name of the user",
           "maxLength": 100
         },
         "nim": {
           "type": "string",
-          "description": "Student identification number (NIM)",
+          "description": "Student or academic identification number",
           "maxLength": 30
         },
         "email": {
@@ -28,8 +28,8 @@
         },
         "role": {
           "type": "string",
-          "description": "Academic role of the user, e.g. Mahasiswa IBIKKG",
-          "maxLength": 50
+          "description": "System role: student, tutor, or admin",
+          "enum": ["student", "tutor", "admin"]
         },
         "createdAt": {
           "type": "string",
@@ -37,13 +37,93 @@
           "description": "Timestamp when account profile was registered"
         }
       },
-      "required": ["uid", "fullName", "email"]
+      "required": ["uid", "fullName", "email", "role"]
+    },
+    "Article": {
+      "title": "Article",
+      "description": "Academic APSI article and syllabus material",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique article document ID",
+          "maxLength": 128
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the academic material",
+          "maxLength": 200
+        },
+        "category": {
+          "type": "string",
+          "description": "Academic category or subject area",
+          "maxLength": 100
+        },
+        "moduleCode": {
+          "type": "string",
+          "description": "APSI curriculum module code (e.g. MOD-01)",
+          "maxLength": 30
+        },
+        "summary": {
+          "type": "string",
+          "description": "Executive abstract or summary of the material",
+          "maxLength": 1000
+        },
+        "reference": {
+          "type": "string",
+          "description": "Academic citation reference",
+          "maxLength": 500
+        },
+        "author": {
+          "type": "string",
+          "description": "Display name of the author or tutor",
+          "maxLength": 100
+        },
+        "authorId": {
+          "type": "string",
+          "description": "UID of the user who authored the material",
+          "maxLength": 128
+        },
+        "updatedDate": {
+          "type": "string",
+          "description": "Last updated date string",
+          "maxLength": 50
+        }
+      },
+      "required": ["id", "title", "moduleCode", "summary"]
+    },
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Trusted administrative authority record",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "UID of the authorized administrator",
+          "maxLength": 128
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Admin email",
+          "maxLength": 100
+        }
+      },
+      "required": ["uid"]
     }
   },
   "firestore": {
     "/users/{userId}": {
       "schema": "UserProfile",
       "description": "User profile documents keyed by Firebase Auth uid"
+    },
+    "/articles/{articleId}": {
+      "schema": "Article",
+      "description": "Academic APSI articles contributed by tutors and managed by admins"
+    },
+    "/admins/{userId}": {
+      "schema": "AdminRecord",
+      "description": "Collection of trusted administrator user IDs"
     }
   }
 }

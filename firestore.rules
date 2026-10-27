@@ -1,13 +1,13 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Default deny catch-all
+    // 1. Default deny catch-all
     match /{document=**} {
       allow read, write: if false;
     }
 
     function isValidId(id) {
-      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
     }
 
     function isSignedIn() {
@@ -18,24 +18,74 @@ service cloud.firestore {
       return isSignedIn() && request.auth.uid == userId;
     }
 
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'stefanleonard935@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isTutor() {
+      return isSignedIn() && (
+        isAdmin() ||
+        (
+          exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+          get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'tutor'
+        )
+      );
+    }
+
+    function isValidUserProfile(data) {
+      return data.keys().hasAll(['uid', 'fullName', 'email', 'role']) &&
+        data.uid is string && data.uid.size() <= 128 &&
+        data.fullName is string && data.fullName.size() > 0 && data.fullName.size() <= 100 &&
+        data.email is string && data.email.size() <= 100 &&
+        data.role in ['student', 'tutor', 'admin', 'Mahasiswa IBIKKG', 'Dosen Pembimbing', 'Administrator'];
+    }
+
+    function isValidArticle(data) {
+      return data.keys().hasAll(['id', 'title', 'moduleCode', 'summary']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.title is string && data.title.size() > 0 && data.title.size() <= 200 &&
+        data.moduleCode is string && data.moduleCode.size() <= 30 &&
+        data.summary is string && data.summary.size() <= 2000;
+    }
+
+    // User Profiles Collection
     match /users/{userId} {
-      allow get: if isValidId(userId) && isOwner(userId);
-      allow list: if false;
+      allow get: if isValidId(userId) && (isOwner(userId) || isAdmin());
+      allow list: if isAdmin();
       allow create: if isValidId(userId)
         && isOwner(userId)
         && request.resource.data.uid == userId
-        && request.resource.data.fullName is string
-        && request.resource.data.fullName.size() > 0
-        && request.resource.data.fullName.size() <= 100
-        && request.resource.data.email is string
-        && request.resource.data.email.size() <= 100;
+        && isValidUserProfile(request.resource.data);
       allow update: if isValidId(userId)
-        && isOwner(userId)
+        && ((isOwner(userId) && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['role']))) || isAdmin())
         && request.resource.data.uid == userId
-        && request.resource.data.fullName is string
-        && request.resource.data.fullName.size() > 0
-        && request.resource.data.fullName.size() <= 100;
-      allow delete: if false;
+        && isValidUserProfile(request.resource.data);
+      allow delete: if isValidId(userId) && isAdmin();
+    }
+
+    // Academic Articles Collection (Read for students/everyone, Write for tutors/admins)
+    match /articles/{articleId} {
+      allow get, list: if true;
+      allow create: if isValidId(articleId)
+        && isSignedIn()
+        && (isTutor() || isAdmin())
+        && isValidArticle(request.resource.data);
+      allow update: if isValidId(articleId)
+        && isSignedIn()
+        && (isTutor() || isAdmin())
+        && isValidArticle(request.resource.data);
+      allow delete: if isValidId(articleId)
+        && isSignedIn()
+        && isAdmin();
+    }
+
+    // Admins Collection
+    match /admins/{userId} {
+      allow get: if isValidId(userId) && (isOwner(userId) || isAdmin());
+      allow list, create, update, delete: if isAdmin();
     }
   }
 }
