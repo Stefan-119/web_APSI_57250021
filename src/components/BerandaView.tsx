@@ -138,6 +138,7 @@ export const BerandaView: React.FC<BerandaViewProps> = ({
                   }}
                   className="p-1 text-[#4285f4] hover:bg-[#f8f9fa] rounded-full transition-colors"
                   title="Pencarian Suara"
+                  aria-label="Pencarian Suara"
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />

@@ -61,6 +61,9 @@ export const IbikkgLogo: React.FC<IbikkgLogoProps> = ({
     <img
       src={ibikkgLogoSrc}
       alt={alt}
+      width="40"
+      height="40"
+      decoding="async"
       onError={() => setHasError(true)}
       className={className}
       loading="eager"

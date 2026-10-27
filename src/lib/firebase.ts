@@ -56,7 +56,7 @@ export function handleFirestoreError(error: unknown, operationType: OperationTyp
   throw new Error(JSON.stringify(errInfo));
 }
 
-// Validate connection
+// Validate connection asynchronously during browser idle time so it does not block initial paint
 async function testConnection() {
   try {
     await getDocFromServer(doc(db, 'test', 'connection'));
@@ -66,4 +66,13 @@ async function testConnection() {
     }
   }
 }
-testConnection();
+
+if (typeof window !== 'undefined') {
+  if ('requestIdleCallback' in window) {
+    (window as any).requestIdleCallback(() => {
+      testConnection();
+    });
+  } else {
+    setTimeout(testConnection, 4000);
+  }
+}

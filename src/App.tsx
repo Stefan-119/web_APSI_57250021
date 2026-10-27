@@ -3,19 +3,35 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { ViewScreen, Article } from './types';
 import { ARTICLES_DATA } from './data/mockApsiData';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BerandaView } from './components/BerandaView';
-import { WikipediaArticleView } from './components/WikipediaArticleView';
-import { GoogleSearchConsoleView } from './components/GoogleSearchConsoleView';
-import { NewsletterScreenView } from './components/NewsletterScreenView';
-import { DiagramStudioView } from './components/DiagramStudioView';
-import { GlossaryModal } from './components/GlossaryModal';
-import { AuthModal } from './components/AuthModal';
-import { CommandPalette } from './components/CommandPalette';
+
+// Code-split secondary views and modals to minimize initial bundle size and maximize Lighthouse score
+const WikipediaArticleView = lazy(() =>
+  import('./components/WikipediaArticleView').then((m) => ({ default: m.WikipediaArticleView }))
+);
+const GoogleSearchConsoleView = lazy(() =>
+  import('./components/GoogleSearchConsoleView').then((m) => ({ default: m.GoogleSearchConsoleView }))
+);
+const NewsletterScreenView = lazy(() =>
+  import('./components/NewsletterScreenView').then((m) => ({ default: m.NewsletterScreenView }))
+);
+const DiagramStudioView = lazy(() =>
+  import('./components/DiagramStudioView').then((m) => ({ default: m.DiagramStudioView }))
+);
+const GlossaryModal = lazy(() =>
+  import('./components/GlossaryModal').then((m) => ({ default: m.GlossaryModal }))
+);
+const AuthModal = lazy(() =>
+  import('./components/AuthModal').then((m) => ({ default: m.AuthModal }))
+);
+const CommandPalette = lazy(() =>
+  import('./components/CommandPalette').then((m) => ({ default: m.CommandPalette }))
+);
 
 export default function App() {
   const [currentView, setCurrentView] = useState<ViewScreen>('beranda');
@@ -87,7 +103,7 @@ export default function App() {
 
       {/* Main View Router */}
       <main className="flex-1 pt-16">
-        {currentView === 'beranda' && (
+        {currentView === 'beranda' ? (
           <BerandaView
             onNavigate={handleNavigate}
             onSelectArticle={handleSelectArticle}
@@ -95,55 +111,75 @@ export default function App() {
             onSearchChange={setSearchQuery}
             onOpenGlossary={() => setGlossaryModalOpen(true)}
           />
-        )}
+        ) : (
+          <Suspense
+            fallback={
+              <div className="min-h-[60vh] flex items-center justify-center">
+                <div className="w-8 h-8 border-2 border-[#00288e]/20 border-t-[#00288e] rounded-full animate-spin"></div>
+              </div>
+            }
+          >
+            {currentView === 'ensiklopedia' && (
+              <WikipediaArticleView
+                article={selectedArticle}
+                onSelectArticle={handleSelectArticle}
+                onNavigate={handleNavigate}
+              />
+            )}
 
-        {currentView === 'ensiklopedia' && (
-          <WikipediaArticleView
-            article={selectedArticle}
-            onSelectArticle={handleSelectArticle}
-            onNavigate={handleNavigate}
-          />
-        )}
+            {currentView === 'google-search' && (
+              <GoogleSearchConsoleView
+                onSelectArticle={handleSelectArticle}
+                onNavigate={handleNavigate}
+                initialQuery={searchQuery}
+              />
+            )}
 
-        {currentView === 'google-search' && (
-          <GoogleSearchConsoleView
-            onSelectArticle={handleSelectArticle}
-            onNavigate={handleNavigate}
-            initialQuery={searchQuery}
-          />
-        )}
+            {currentView === 'newsletter' && (
+              <NewsletterScreenView onNavigate={handleNavigate} />
+            )}
 
-        {currentView === 'newsletter' && (
-          <NewsletterScreenView onNavigate={handleNavigate} />
-        )}
-
-        {currentView === 'diagram-studio' && (
-          <DiagramStudioView onNavigate={handleNavigate} />
+            {currentView === 'diagram-studio' && (
+              <DiagramStudioView onNavigate={handleNavigate} />
+            )}
+          </Suspense>
         )}
       </main>
 
       {/* Global Academic Footer */}
       <Footer onNavigate={handleNavigate} />
 
-      {/* Modals & Overlays */}
-      <CommandPalette
-        isOpen={commandPaletteOpen}
-        onClose={() => setCommandPaletteOpen(false)}
-        onNavigate={handleNavigate}
-        onSelectArticle={handleSelectArticle}
-        onOpenGlossary={() => setGlossaryModalOpen(true)}
-      />
+      {/* Modals & Overlays loaded only when triggered */}
+      {commandPaletteOpen && (
+        <Suspense fallback={null}>
+          <CommandPalette
+            isOpen={commandPaletteOpen}
+            onClose={() => setCommandPaletteOpen(false)}
+            onNavigate={handleNavigate}
+            onSelectArticle={handleSelectArticle}
+            onOpenGlossary={() => setGlossaryModalOpen(true)}
+          />
+        </Suspense>
+      )}
 
-      <GlossaryModal
-        isOpen={glossaryModalOpen}
-        onClose={() => setGlossaryModalOpen(false)}
-      />
+      {glossaryModalOpen && (
+        <Suspense fallback={null}>
+          <GlossaryModal
+            isOpen={glossaryModalOpen}
+            onClose={() => setGlossaryModalOpen(false)}
+          />
+        </Suspense>
+      )}
 
-      <AuthModal
-        isOpen={authModal.isOpen}
-        initialMode={authModal.mode}
-        onClose={() => setAuthModal({ isOpen: false, mode: 'login' })}
-      />
+      {authModal.isOpen && (
+        <Suspense fallback={null}>
+          <AuthModal
+            isOpen={authModal.isOpen}
+            initialMode={authModal.mode}
+            onClose={() => setAuthModal({ isOpen: false, mode: 'login' })}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }

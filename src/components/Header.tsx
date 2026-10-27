@@ -264,6 +264,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => onNavigate('glosarium')}
             className="w-8 h-8 rounded-full bg-[#00288e] hover:bg-[#1e40af] flex items-center justify-center shrink-0 text-white transition-colors"
             title="Glosarium A-Z APSI"
+            aria-label="Glosarium A-Z APSI"
           >
             <span className="material-symbols-outlined text-[18px]">auto_stories</span>
           </button>
